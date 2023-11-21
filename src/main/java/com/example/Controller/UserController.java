@@ -83,7 +83,7 @@ public class UserController {
                 return "/user/create.html";
             }
             userService.addUser(userDto);
-            id = userService.getDetailByManv(userDto.getManv()).getId();
+            id = userService.addUser(userDto).getId();
             msg = " tao moi";
         } else {
             result = userService.updateUser(userDto);
