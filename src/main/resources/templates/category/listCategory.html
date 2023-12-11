@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <h1 style="color: red">
+        Danh sách Sản Phẩm </h1>
+    <a th:href="@{/web-category/new}"  class="btn btn-success">Tạo mới</a>
+    <table class="table" style="margin-top: 10px;">
+    <thead>
+    <th>ID</th>
+    <th>Ma The Loai</th>
+    <th>Ten The Loai</th>
+    <th>Thao Tac</th>
+    </thead>
+    <tbody>
+    <th:block th:each="categoryDto: ${list}">
+        <tr>
+            <td th:text="${categoryDto.id}"></td>
+            <td>[[${categoryDto.code}]]</td>
+            <td>[[${categoryDto.name}]]</td>
+            <td>
+                <a th:href="@{/web-category/{id}(id=${categoryDto.id})}" class="btn">Sửa</a>
+                <a th:href="@{'/web-category/delete/' + ${categoryDto.id}}" class="btn">Xoá</a>
+            </td>
+        </tr>
+        </tr>
+    </th:block>
+    </tbody>
+    </table>
+</div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

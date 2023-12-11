@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .div {
+            margin: 30px;
+            display: flex;
+        }
+        label {
+            width: 150px;
+        }
+        input {
+            width: 300px;
+            height: 30px;
+        }
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color: red" >
+    <th:block th:if="${categoryDto.id == null}">
+        Tạo mới thể loại
+    </th:block>
+    <th:block th:unless="${categoryDto.id == null}">
+        Cập nhật thể loại
+    </th:block>
+</h1>
+<h2 style="color: red" th:text="${message}"></h2>
+<form th:action="@{/web-category/save}" enctype="multipart/form-data"
+      th:object="${categoryDto}" th:method="post">
+    <input hidden th:field="*{id}" />
+    <div class="div">
+        <label>Mã thể loại</label>
+        <input th:field="*{code}" />
+        <label th:if="${#fields.hasErrors('code')}" class="error" th:errors="*{code}"></label>
+    </div >
+    <div class="div">
+        <label>Tên thể loại</label>
+        <input th:field="*{name}" />
+        <label th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></label>
+    </div >
+
+    <button type="submit" class="btn btn-success">
+        <th:block th:if="*{id == null}">
+            Create
+        </th:block>
+        <th:block th:unless="*{id == null}">
+            Update
+        </th:block>
+    </button>
+    <a th:href="@{/web-category}"  class="btn btn-secondary">Cancel</a>
+
+</form>
+</body>
+</html>
