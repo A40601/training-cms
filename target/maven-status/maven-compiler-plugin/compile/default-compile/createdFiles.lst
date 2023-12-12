@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 com\example\Dto\ProductDto.class
 com\example\Controller\ProductController.class
 com\example\Controller\CategoryController.class
@@ -20,3 +21,13 @@ com\example\TrainningCmsApplication.class
 com\example\Controller\AdminController.class
 com\example\Entity\ProductEntity.class
 com\example\Repository\UserRepository.class
+=======
+com/example/WebConfig/WebConfig.class
+com/example/Service/UserService.class
+com/example/Repository/UserRepository.class
+com/example/TrainningCmsApplication.class
+com/example/UserNotFoundException.class
+com/example/Dto/UserDto.class
+com/example/Entity/UserEntity.class
+com/example/Controller/UserController.class
+>>>>>>> origin/main
