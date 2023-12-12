@@ -6,6 +6,7 @@ import com.example.Entity.ProductEntity;
 import com.example.Repository.CategoryRepository;
 import com.example.Repository.ProductRepository;
 import com.example.UserNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

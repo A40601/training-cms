@@ -4,6 +4,7 @@ import com.example.Dto.CategoryDto;
 import com.example.Entity.CategoryEntity;
 import com.example.Repository.CategoryRepository;
 import com.example.UserNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,11 +60,12 @@ public class CategoryService {
         categoryRepository.save(categoryEntity);
         return categoryDto;
     }
-    public void deleteCategory(Integer id){
+    public void deleteCategory(Integer id) {
         Long count = categoryRepository.countById(id);
-        if (count == null || count == 0){
-            throw new UserNotFoundException("could not find any users with Id"+ id);
+        if (count == null || count == 0) {
+            throw new UserNotFoundException("could not find any users with Id" + id);
         }
         categoryRepository.deleteById(id);
     }
+
 }

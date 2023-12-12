@@ -48,9 +48,13 @@
 
     <div class="div">
         <label>mã thể loại</label>
-        <input th:field="*{cateId}" />
-        <label th:if="${#fields.hasErrors('cateId')}" class="error" th:errors="*{cateId}"></label>
-    </div >
+        <select th:field="*{categoryEntity}" class="form-control">
+            <option value="">All Categories</option>
+            <option th:each="cate : ${listCate}" th:value="${cate.id}" th:text="${cate.name}"></option>
+        </select>
+    </div>
+
+
     <button type="submit" class="btn btn-success">
         <th:block th:if="*{id == null}">
             Create
