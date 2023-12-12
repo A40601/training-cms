@@ -1,5 +1,6 @@
 package com.example.Dto;
 
+import com.example.Entity.CategoryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,5 +12,5 @@ public class ProductDto {
     private Integer id;
     private String code;
     private String name;
-    private Integer cateId;
+    private CategoryEntity categoryEntity;
 }

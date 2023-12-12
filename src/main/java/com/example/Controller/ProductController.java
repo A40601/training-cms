@@ -26,8 +26,7 @@ import javax.ws.rs.QueryParam;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("web-product")
 public class ProductController {
@@ -45,28 +44,34 @@ public class ProductController {
        List<CategoryEntity> list = categoryService.getAllCate(name);
         model.addAttribute("listCate", list);
         model.addAttribute("list", listProduct);
+        model.addAttribute("list", listProduct);
         return "product1/listProduct";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, params = "categoryName")
+    @RequestMapping(value = "", method = RequestMethod.GET, params = "categoryName")
     public String getProductByCategoryName(@QueryParam("categoryName") String categoryName, String name, Model model){
         List<ProductEntity> productEntities = productService.getProductByCategoryName(categoryName);
         List<CategoryEntity> list = categoryService.getAllCate(name);
+        model.addAttribute("categoryName", categoryName);
         model.addAttribute("listCate", list);
         model.addAttribute("product", productEntities);
         return "/product1/Product";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/new")
-    String newPage(Model model) {
+    String newPage(Model model, String name) {
         ProductDto p = new ProductDto();
+        List<CategoryEntity> list = categoryService.getAllCate(name);
+        model.addAttribute("listCate", list);
         model.addAttribute("productDto", p);
         return "product1/create";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}",  params = "!categoryName")
-    public String detailProduct(@PathVariable Integer id, Model model) {
+    public String detailProduct(@PathVariable Integer id, Model model, String name) {
         Object productDto = productService.getDetail(id);
+        List<CategoryEntity> list = categoryService.getAllCate(name);
+        model.addAttribute("listCate", list);
         model.addAttribute("productDto", productDto);
         return "product1/create";
     }
