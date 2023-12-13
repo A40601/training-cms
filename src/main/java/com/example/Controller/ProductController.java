@@ -44,7 +44,6 @@ public class ProductController {
        List<CategoryEntity> list = categoryService.getAllCate(name);
         model.addAttribute("listCate", list);
         model.addAttribute("list", listProduct);
-        model.addAttribute("list", listProduct);
         return "product1/listProduct";
     }
 

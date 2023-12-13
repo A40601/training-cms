@@ -27,9 +27,6 @@ public class ProductService {
             return productRepository.findAllByName(name);
     }
 
-    public  List<ProductEntity> getAllProductByCateName(String name){
-        return productRepository.findAllByCategoryEntity_Name(name);
-    }
     public ProductDto getDetail(Integer id) {
         ProductDto productDto = new ProductDto();
         ProductEntity productEntity = productRepository.findById(id).get();

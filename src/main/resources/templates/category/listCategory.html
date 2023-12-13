@@ -26,7 +26,7 @@
             <td>[[${categoryDto.name}]]</td>
             <td>
                 <a th:href="@{/web-category/{id}(id=${categoryDto.id})}" class="btn">Sửa</a>
-                <a th:href="@{'/web-category/delete/' + ${categoryDto.id}}" class="btn">Xoá</a>
+                <a th:href="@{'/web-category/delete/' + ${categoryDto.id}}" onclick="return confirmDelete(this.getAttribute('href'))" class="btn">Xoá</a>
             </td>
         </tr>
         </tr>
@@ -37,3 +37,15 @@
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function confirmDelete(deleteUrl) {
+        var result = confirm("Bạn có chắc chắn muốn xóa không?");
+
+        if (result) {
+            window.location.href = deleteUrl;
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>

@@ -37,12 +37,12 @@
     <input hidden th:field="*{id}" />
     <div class="div">
         <label>Ma Sản phẩm</label>
-        <input th:field="*{code}" />
+        <input id="code" th:field="*{code}" />
         <label th:if="${#fields.hasErrors('code')}" class="error" th:errors="*{code}"></label>
     </div >
     <div class="div">
         <label>Tên Sản phẩm</label>
-        <input th:field="*{name}" />
+        <input id="name" th:field="*{name}" />
         <label th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></label>
     </div >
 
@@ -55,7 +55,7 @@
     </div>
 
 
-    <button type="submit" class="btn btn-success">
+    <button type="submit" class="btn btn-success" onclick="return validateInputs()">
         <th:block th:if="*{id == null}">
             Create
         </th:block>
@@ -68,3 +68,24 @@
 </form>
 </body>
 </html>
+
+<script>
+    function validateInputs() {
+        var codeValue = document.getElementById('code').value.trim();
+        var nameValue = document.getElementById('name').value.trim();
+
+        if (codeValue === '' && nameValue === '') {
+            alert("Vui lòng điền đầy đủ thông tin Mã Sản Phẩm và Tên Sản Phẩm.");
+            return false;
+        } else if (codeValue === '') {
+            alert("Vui lòng điền đầy đủ thông tin Mã Sản Phẩm.");
+            return false;
+        } else if (nameValue === '') {
+            alert("Vui lòng điền đầy đủ thông tin Tên Sản Phẩm.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+

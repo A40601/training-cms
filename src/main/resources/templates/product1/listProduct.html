@@ -39,7 +39,7 @@
         <td th:text="${product.categoryEntity != null ? product.categoryEntity.name : '?'}">
         <td>
           <a th:href="@{/web-product/{id}(id=${product.id})}" class="btn">Sửa</a>
-          <a th:href="@{'/web-product/delete/' + ${product.id}}" class="btn">Xoá</a>
+          <a  th:href="@{'/web-product/delete/' + ${product.id}}" onclick="return confirmDelete(this.getAttribute('href'))" class="btn">Xoá</a>
         </td>
       </tr>
       </tr>
@@ -50,5 +50,16 @@
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function confirmDelete(deleteUrl) {
+    var result = confirm("Bạn có chắc chắn muốn xóa không?");
 
+    if (result) {
+      window.location.href = deleteUrl;
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>
 
