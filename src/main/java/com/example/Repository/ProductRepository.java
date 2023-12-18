@@ -12,9 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
-    @Query("SELECT p FROM ProductEntity p JOIN FETCH p.categoryEntity WHERE p.name = :name")
     List<ProductEntity> findAllByName(@Param("name") String name);
 
+    @Query("SELECT u FROM ProductEntity u WHERE CONCAT(u.name,'') LIKE %?1%" )
+    List<ProductEntity> searchProduct(String keyword);
 
     public Integer countById(Integer id);
     ProductEntity findFirstByCode(String code);
