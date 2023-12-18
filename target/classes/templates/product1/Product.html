@@ -9,14 +9,20 @@
 <div class="container">
   <h1 style="color: red">
     Danh sách Sản Phẩm </h1>
-  <a th:href="@{/web-product/new}"  class="btn btn-success">Tạo mới</a>
+  <div style="margin-bottom: 10px">
+    <a th:href="@{/web-product/new}"  class="btn btn-success"  style="margin-bottom: 10px">Tạo mới</a>
+    <form action="" method="get">
+      <input type="text" name="keyword" placeholder="Nhập từ khóa tìm kiếm">
+      <button type="submit">Tìm kiếm</button>
+    </form>
+  </div>
 
   <form th:action="@{/web-product}" method="get">
     <label for="categoryName">Filter by Category:</label>
     <select name="categoryName" id="categoryName">
       <option value="">All Categories</option>
       <th:block th:each="category : ${listCate}">
-        <option th:value="${category.name}" th:text="${category.name}"></option>
+        <option th:value="${category.name}" th:text="${category.name}" th:selected="${category.name eq categoryName}"></option>
       </th:block>
     </select>
     <button type="submit">Filter</button>

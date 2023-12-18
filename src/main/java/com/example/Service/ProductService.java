@@ -9,6 +9,8 @@ import com.example.UserNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
@@ -80,5 +82,10 @@ public class ProductService {
         }
         return null;
     }
-
+    public List<ProductEntity> searchProduct(String keyword) {
+        return productRepository.searchProduct(keyword);
+    }
+//    public Page<ProductEntity> getProduct(Pageable pageable){
+//        return productRepository.findAll(pageable);
+//    }
 }

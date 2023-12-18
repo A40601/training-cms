@@ -9,43 +9,51 @@
 <div class="container">
   <h1 style="color: red">
     Danh sách Sản Phẩm </h1>
-  <a th:href="@{/web-product/new}"  class="btn btn-success">Tạo mới</a>
+  <div style="margin-bottom: 8px">
+    <a th:href="@{/web-product/new}" style="margin-bottom: 8px"  class="btn btn-success">Tạo mới</a>
+    <form action="" method="get">
+      <input type="text" name="keyword" th:value="${keyword}" placeholder="Nhập từ khóa tìm kiếm">
+      <button type="submit">Tìm kiếm</button>
+    </form>
+  </div>
 
-  <form th:action="@{/web-product{categoryName}(categoryName=${categoryName})}" method="get">
+  <form th:action="@{/web-product}" method="get">
     <label for="categoryName">Filter by Category:</label>
     <select name="categoryName" id="categoryName">
       <option value="">All Categories</option>
       <th:block th:each="category : ${listCate}">
-        <option th:value="${category.name}" th:text="${category.name}"></option>
+        <option th:value="${category.name}" th:text="${category.name}" th:selected="${category.name eq categoryName}"></option>
       </th:block>
     </select>
     <button type="submit">Filter</button>
   </form>
 
-  <table class="table table-bordered border-primary mb-3" style="margin-top: 10px;">
-    <thead>
-    <th>ID</th>
-    <th>Ma San Pham</th>
-    <th>Ten San Pham</th>
-    <th>The Loai</th>
-    <th>Thao tac</th>
-    </thead>
-    <tbody>
-    <th:block th:each="product: ${list}">
-      <tr>
-        <td th:text="${product.id}"></td>
-        <td th:text="${product.code}"></td>
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.categoryEntity != null ? product.categoryEntity.name : '?'}">
-        <td>
-          <a th:href="@{/web-product/{id}(id=${product.id})}" class="btn">Sửa</a>
-          <a th:href="@{'/web-product/delete/' + ${product.id}}" class="btn">Xoá</a>
-        </td>
-      </tr>
-      </tr>
-    </th:block>
-    </tbody>
-  </table>
+  <div th:if="${pageProduct.hasContent()}">
+    <table class="table table-bordered border-primary mb-3" style="margin-top: 10px;">
+      <thead>
+      <th>ID</th>
+      <th>Ma San Pham</th>
+      <th>Ten San Pham</th>
+      <th>The Loai</th>
+      <th>Thao tac</th>
+      </thead>
+      <tbody>
+      <th:block th:each="product: ${list}">
+        <tr>
+          <td th:text="${product.id}"></td>
+          <td th:text="${product.code}"></td>
+          <td th:text="${product.name}"></td>
+          <td th:text="${product.categoryEntity != null ? product.categoryEntity.name : '?'}">
+          <td>
+            <a th:href="@{/web-product/{id}(id=${product.id})}" class="btn">Sửa</a>
+            <a th:href="@{'/web-product/delete/' + ${product.id}}" class="btn">Xoá</a>
+          </td>
+        </tr>
+        </tr>
+      </th:block>
+      </tbody>
+    </table>
+  </div>
 </div>
 </body>
 </html>
