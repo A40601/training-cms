@@ -2,6 +2,8 @@ package com.example.Repository;
 
 
 import com.example.Entity.ProductEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +28,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     @Modifying
     @Query("DELETE FROM ProductEntity p WHERE p.id = :id")
     void deleteProductById(@Param("id") Integer id);
+
+
 }

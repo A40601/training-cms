@@ -10,11 +10,15 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 @Service
 public class ProductService {
@@ -85,7 +89,9 @@ public class ProductService {
     public List<ProductEntity> searchProduct(String keyword) {
         return productRepository.searchProduct(keyword);
     }
-//    public Page<ProductEntity> getProduct(Pageable pageable){
-//        return productRepository.findAll(pageable);
-//    }
+    public Page<ProductEntity> getProduct(Pageable pageable){
+        return productRepository.findAll(pageable);
+    }
+
+
 }

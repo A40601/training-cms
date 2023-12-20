@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Danh sách Product</title>
+  <link href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +21,7 @@
   <form th:action="@{/web-product}" method="get">
     <label for="categoryName">Filter by Category:</label>
     <select name="categoryName" id="categoryName">
-      <option value="">All Categories</option>
+      <option th:value="0" >All Categories</option>
       <th:block th:each="category : ${listCate}">
         <option th:value="${category.name}" th:text="${category.name}" th:selected="${category.name eq categoryName}"></option>
       </th:block>
@@ -28,8 +29,8 @@
     <button type="submit">Filter</button>
   </form>
 
-  <div th:if="${pageProduct.hasContent()}">
-    <table class="table table-bordered border-primary mb-3" style="margin-top: 10px;">
+
+    <table id="table1" class="table table-bordered border-primary mb-3" style="margin-top: 10px;">
       <thead>
       <th>ID</th>
       <th>Ma San Pham</th>
@@ -38,7 +39,7 @@
       <th>Thao tac</th>
       </thead>
       <tbody>
-      <th:block th:each="product: ${list}">
+      <th:block th:each="product: ${products}">
         <tr>
           <td th:text="${product.id}"></td>
           <td th:text="${product.code}"></td>
@@ -53,10 +54,20 @@
       </th:block>
       </tbody>
     </table>
-  </div>
+
 </div>
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#table1').DataTable({
+      "bFilter": false,
+      "pagingType": "simple_numbers",
+    });
+  });
+</script>
 
