@@ -41,26 +41,48 @@ public class ProductController {
     @Autowired
     ProductRepository productRepository;
 
-    @RequestMapping(method = RequestMethod.GET, value = "")
-    String listProduct(@RequestParam(required = false) String name,
-                    Model model, @Param("keyword") String keyword){
+//    @RequestMapping(method = RequestMethod.GET, value = "")
+//    String listProduct(@RequestParam(required = false) String name,
+//                    Model model, @Param("keyword") String keyword,
+//                    @RequestParam(required = false, defaultValue = "0") int page,
+//                     @RequestParam(required = false, defaultValue = "10") int size){
 //        PageRequest pageable = PageRequest.of(page, size);
 //        Page<ProductEntity> pageProduct = productService.getProduct(pageable);
-       List<ProductEntity> listProduct = productService.getAllProduct(name);
-       List<CategoryEntity> listCate = categoryService.getAllCate(name);
-
-       if (keyword != null){
-           listProduct=productService.searchProduct(keyword);
-           model.addAttribute("keyword", keyword);
-       }
-        model.addAttribute("listCate", listCate);
-        model.addAttribute("list", listProduct);
+//       List<ProductEntity> listProduct = productService.getAllProduct(name);
+//       List<CategoryEntity> listCate = categoryService.getAllCate(name);
+//
+//       if (keyword != null){
+//           listProduct=productService.searchProduct(keyword);
+//           model.addAttribute("keyword", keyword);
+//       }
+//        model.addAttribute("listCate", listCate);
+//        model.addAttribute("list", listProduct);
 //        model.addAttribute("pageProduct", pageProduct );
-        return "product1/listProduct";
+//        return "product1/listProduct";
+//    }
+@GetMapping
+public String showProducts(@RequestParam(required = false) String keyword,
+
+                           Model model, String name) {
+    List<ProductEntity> products;
+    List<CategoryEntity> category = categoryService.getAllCate(name);
+
+    if (keyword != null && !keyword.isEmpty()) {
+        products = productService.searchProduct(keyword);
+    } else {
+        products = productService.getAllProduct(name);
     }
 
+    model.addAttribute("keyword", keyword);
+    model.addAttribute("listCate", category);
+    model.addAttribute("products", products);
+    return "product1/listProduct";
+}
+
     @RequestMapping(value = "", method = RequestMethod.GET, params = "categoryName")
-    public String getProductByCategoryName(@QueryParam("categoryName") String categoryName, String name, Model model){
+    public String getProductByCategoryName(@QueryParam("categoryName") String categoryName,
+                                           String name, Model model){
+
         List<ProductEntity> productEntities = productService.getProductByCategoryName(categoryName);
         List<CategoryEntity> list = categoryService.getAllCate(name);
         model.addAttribute("categoryName", categoryName);
@@ -68,6 +90,7 @@ public class ProductController {
         model.addAttribute("product", productEntities);
         return "/product1/Product";
     }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/new")
     String newPage(Model model, String name) {
